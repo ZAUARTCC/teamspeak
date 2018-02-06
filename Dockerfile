@@ -25,6 +25,7 @@ RUN   groupadd -r $TS_USER \
         $TS_USER
 
 WORKDIR ${TS_HOME}
+VOLUME ['${TS_HOME}']
 
 RUN  wget "http://dl.4players.de/ts/releases/${TS_VERSION}/${TS_FILENAME}-${TS_VERSION}.tar.bz2" -O ${TS_FILENAME}-${TS_VERSION}.tar.bz2 \
        && tar -xjf "${TS_FILENAME}-${TS_VERSION}.tar.bz2" \
@@ -42,6 +43,8 @@ RUN chown -R ${TS_USER}:${TS_USER} ${TS_HOME} && chmod +x entrypoint.sh
 USER  ${TS_USER}
 
 EXPOSE 9987/udp
+EXPOSE 9988/udp
+EXPOSE 9989/udp
 EXPOSE 10011
 EXPOSE 30033
 
